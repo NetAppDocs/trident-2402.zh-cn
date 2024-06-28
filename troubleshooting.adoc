@@ -1,0 +1,234 @@
+---
+sidebar: sidebar 
+permalink: troubleshooting.html 
+keywords: troubleshooting, trident 
+summary: 使用此处提供的指针排除安装和使用 Astra Trident 时可能遇到的问题。 
+---
+= 故障排除
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+使用此处提供的指针排除安装和使用 Astra Trident 时可能遇到的问题。
+
+
+
+== 常规故障排除
+
+* 如果Trident Pod无法正常启动(例如、当Trident Pod卡在中时) `ContainerCreating` 阶段中的就绪容器少于两个)、正在运行 `kubectl -n trident describe deployment trident` 和 `kubectl -n trident describe pod trident-********-****` 可以提供更多见解。获取kubelet日志(例如、通过 `journalctl -xeu kubelet`)也很有用。
+* 如果Trident日志中的信息不足、您可以尝试通过传递来为Trident启用调试模式 `-d` 根据您的安装选项标记为install参数。
++
+然后、使用确认已设置调试 `./tridentctl logs -n trident` 和搜索 `level=debug msg` 在日志中。
+
++
+随操作员一起安装::
++
+--
+[listing]
+----
+kubectl patch torc trident -n <namespace> --type=merge -p '{"spec":{"debug":true}}'
+----
+此操作将重新启动所有 Trident Pod ，这可能需要几秒钟的时间。您可以通过观察输出中的"期限"列来检查此情况 `kubectl get pod -n trident`。
+
+对于Astra Trident 20.07和20.10、请使用 `tprov` 代替 `torc`。
+
+--
+随 Helm 一起安装::
++
+--
+[listing]
+----
+helm upgrade <name> trident-operator-21.07.1-custom.tgz --set tridentDebug=true`
+----
+--
+使用 tridentctl 安装::
++
+--
+[listing]
+----
+./tridentctl uninstall -n trident
+./tridentctl install -d -n trident
+----
+--
+
+
+* 您也可以通过包括来获取每个后端的调试日志 `debugTraceFlags` 在后端定义中。例如、包括 `debugTraceFlags: {“api”:true, “method”:true,}` 在Trident日志中获取API调用和方法遍历。现有后端可以具有 `debugTraceFlags` 已配置 `tridentctl backend update`。
+* 使用RedHat CoreOS时、请确保执行此操作 `iscsid` 在工作节点上启用并默认启动。可以使用 OpenShift MachineConfigs 或修改点燃模板来完成此操作。
+* 使用 Trident 时可能会遇到的一个常见问题 https://azure.microsoft.com/en-us/services/netapp/["Azure NetApp Files"] 租户和客户端密码来自权限不足的应用程序注册。有关完整的三项要求列表、请参见 link:trident-use/anf.html["Azure NetApp Files"] Configuration
+* 如果在将PV挂载到容器时出现问题、请确保这样 `rpcbind` 已安装且正在运行。使用主机操作系统所需的软件包管理器并检查是否 `rpcbind` 正在运行。您可以检查的状态 `rpcbind` 通过运行提供服务 `systemctl status rpcbind` 或其等效项。
+* Trident后端报告其位于中 `failed` State尽管之前已执行过操作、但可能是由于更改了与后端关联的SVM/admin凭据而导致的。使用更新后端信息 `tridentctl update backend` 或者、放弃Trident POD将修复此问题描述。
+* 如果在容器运行时安装Trident时遇到权限问题、请尝试使用安装Trident `--in cluster=false` 标志。这不会使用安装程序POD、并可避免因出现权限问题 `trident-installer` 用户。
+* 使用 `uninstall parameter <Uninstalling Trident>` 用于在运行失败后进行清理。默认情况下，该脚本不会删除 Trident 创建的 CRD ，因此即使在正在运行的部署中，也可以安全地卸载并重新安装。
+* 如果要降级到早期版本的三端到功能、请先运行 `tridentctl uninstall` 用于删除Trident的命令。下载所需的 https://github.com/NetApp/trident/releases["Trident 版本"] 并使用安装 `tridentctl install` 命令：
+* 成功安装后、如果PVC卡在中 `Pending` 阶段、运行 `kubectl describe pvc` 可以提供追加信息 、说明Trident为何无法为此PVC配置PV。
+
+
+
+
+== 使用操作员无法成功部署TRIdent
+
+如果使用操作员部署Trident、则为的状态 `TridentOrchestrator` 更改自 `Installing` to `Installed`。如果您观察到 `Failed` 状态、并且操作员无法自行恢复、您应运行以下命令来检查操作员的日志：
+
+[listing]
+----
+tridentctl logs -l trident-operator
+----
+跟踪 trident 操作器容器的日志可能会指向问题所在。例如，其中一个问题描述可能是无法从运行良好的环境中的上游注册表中提取所需的容器映像。
+
+要了解为什么没有成功安装｛\f151、｝您｛\f151。｝
+请查看 `TridentOrchestrator` 状态。
+
+[listing]
+----
+kubectl describe torc trident-2
+Name:         trident-2
+Namespace:
+Labels:       <none>
+Annotations:  <none>
+API Version:  trident.netapp.io/v1
+Kind:         TridentOrchestrator
+...
+Status:
+  Current Installation Params:
+    IPv6:
+    Autosupport Hostname:
+    Autosupport Image:
+    Autosupport Proxy:
+    Autosupport Serial Number:
+    Debug:
+    Image Pull Secrets:         <nil>
+    Image Registry:
+    k8sTimeout:
+    Kubelet Dir:
+    Log Format:
+    Silence Autosupport:
+    Trident Image:
+  Message:                      Trident is bound to another CR 'trident'
+  Namespace:                    trident-2
+  Status:                       Error
+  Version:
+Events:
+  Type     Reason  Age                From                        Message
+  ----     ------  ----               ----                        -------
+  Warning  Error   16s (x2 over 16s)  trident-operator.netapp.io  Trident is bound to another CR 'trident'
+----
+此错误表示已存在 `TridentOrchestrator`
+用于安装Trident。因为每个Kubbernetes集群只能
+如果有一个｛\f151、｝操作员可确保任何给定的｛\f151。｝
+只有一个活动时间 `TridentOrchestrator` 可以
+创建。
+
+此外，观察 Trident Pod 的状态通常可以指示情况是否不正确。
+
+[listing]
+----
+kubectl get pods -n trident
+
+NAME                                READY   STATUS             RESTARTS   AGE
+trident-csi-4p5kq                   1/2     ImagePullBackOff   0          5m18s
+trident-csi-6f45bfd8b6-vfrkw        4/5     ImagePullBackOff   0          5m19s
+trident-csi-9q5xc                   1/2     ImagePullBackOff   0          5m18s
+trident-csi-9v95z                   1/2     ImagePullBackOff   0          5m18s
+trident-operator-766f7b8658-ldzsv   1/1     Running            0          8m17s
+----
+您可以清楚地看到Pod无法完全初始化
+因为未提取一个或多个容器映像。
+
+要解决此问题、您应编辑 `TridentOrchestrator` CR.
+或者、您也可以删除 `TridentOrchestrator`，然后创建新的
+其中一个定义经过修改且准确无误。
+
+
+
+== 使用无法成功部署TRIYent `tridentctl`
+
+为了帮助确定出现了什么问题、您可以使用重新运行安装程序 ``-d`` 参数、用于打开调试模式并帮助您了解问题所在：
+
+[listing]
+----
+./tridentctl install -n trident -d
+----
+解决问题后、您可以按如下所示清理安装、然后运行 `tridentctl install` 命令：
+
+[listing]
+----
+./tridentctl uninstall -n trident
+INFO Deleted Trident deployment.
+INFO Deleted cluster role binding.
+INFO Deleted cluster role.
+INFO Deleted service account.
+INFO Removed Trident user from security context constraint.
+INFO Trident uninstallation succeeded.
+----
+
+
+== 完全删除Asta Trandent和CRD
+
+您可以完全删除Asta Dent以及所有创建的CRD和关联的自定义资源。
+
+
+WARNING: 此操作无法撤消。除非您需要全新安装Asta三端安装、否则请勿执行此操作。要在不删除CRD的情况下卸载Astra Trdent、请参阅 link:trident-managing-k8s/uninstall-trident.html["卸载 Astra Trident"]。
+
+[role="tabbed-block"]
+====
+.Trident 运算符
+--
+要卸载Asta Dandent并使用Dandent操作符完全删除CRD：
+
+[listing]
+----
+kubectl patch torc <trident-orchestrator-name> --type=merge -p '{"spec":{"wipeout":["crds"],"uninstall":true}}'
+----
+--
+.掌舵
+--
+要使用Helm卸载Asta Dent并完全删除CRD、请执行以下操作：
+
+[listing]
+----
+kubectl patch torc trident --type=merge -p '{"spec":{"wipeout":["crds"],"uninstall":true}}'
+----
+--
+.<code>tridentctl</code>
+--
+在使用卸载Asta Dent后完全删除CRD `tridentctl`
+
+[listing]
+----
+tridentctl obliviate crd
+----
+--
+====
+
+
+== 使用Kubnetes 1.26上的rwx原始块命名区卸载NVMe节点失败
+
+如果您运行的是Kubnetes 1.26、则在对rwx原始块命名区使用NVMe/TCP时、节点取消暂存可能会失败。以下场景提供了故障的临时解决策。或者、您也可以将Kubbernetes升级到1.27。
+
+
+
+=== 已删除命名空间和POD
+
+假设您已将Asta三端到托管命名空间(NVMe永久性卷)附加到Pod。如果直接从ONTAP后端删除命名空间、则取消暂存过程会在您尝试删除Pod后停滞。此情形不会影响Kubornetes集群或其他功能。
+
+.临时解决策
+从相应节点卸载永久性卷(与该命名空间对应)并将其删除。
+
+
+
+=== 已阻止数据LIF
+
+ If you block (or bring down) all the dataLIFs of the NVMe Astra Trident backend, the unstaging process gets stuck when you attempt to delete the pod. In this scenario, you cannot run any NVMe CLI commands on the Kubernetes node.
+.临时解决策
+启动dataLIF以恢复完整功能。
+
+
+
+=== 已删除命名空间映射
+
+ If you remove the `hostNQN` of the worker node from the corresponding subsystem, the unstaging process gets stuck when you attempt to delete the pod. In this scenario, you cannot run any NVMe CLI commands on the Kubernetes node.
+.临时解决策
+添加 `hostNQN` 返回到子系统。

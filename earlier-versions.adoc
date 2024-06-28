@@ -1,0 +1,27 @@
+---
+sidebar: sidebar 
+permalink: earlier-versions.html 
+keywords: earlier versions, astra trident versions 
+summary: 您可以使用版本选择器在最新版本和以前的四个版本之间导航、也可以使用以下链接。 
+---
+= 文档的早期版本
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您未运行Asta Trident 24.02、则可通过获取先前版本的文档 link:get-help.html["Astra三端支持生命周期"]。
+
+* https://docs.netapp.com/us-en/trident-2310/index.html["Astra三打23.10."^]
+* https://docs.netapp.com/us-en/trident-2307/index.html["A作用 三排版23.07"^]
+* https://docs.netapp.com/us-en/trident-2304/index.html["Astra三排版23.04"^]
+* https://docs.netapp.com/us-en/trident-2301/index.html["Astra三排版23.01"^]
+* https://docs.netapp.com/us-en/trident-2210/index.html["Asta三排星22.10."^]
+* https://docs.netapp.com/us-en/trident-2207/index.html["Asta三排版22.07"^]
+* https://docs.netapp.com/us-en/trident-2204/index.html["Asta三排版22.04."^]
+* https://docs.netapp.com/us-en/trident-2201/index.html["Asta三排版22.01."^]
+* https://docs.netapp.com/us-en/trident-2110/index.html["Asta三打21.10."^]
+* https://docs.netapp.com/us-en/trident-2107/index.html["Astra Trident 21.07"^]
+

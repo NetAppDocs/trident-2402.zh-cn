@@ -1,0 +1,164 @@
+---
+sidebar: sidebar 
+permalink: trident-managing-k8s/upgrade-operator.html 
+keywords: upgrade, trident, methods, operator, tridentctl, helm 
+summary: 您可以使用操作员轻松升级现有的 Astra Trident 安装。 
+---
+= 使用Trident Operator或Helm升级Astra三端安装
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用三端操作员手动或使用Helm升级A作用 于三端的Astra。您可以从一个TRIdent操作员安装升级到另一个TRIdent操作员安装或从升级 `tridentctl` 安装到一个TRIdent操作员版本。请查看 link:upgrade-trident.html#select-an-upgrade-method["选择升级方法"] 升级三端修复程序安装之前。
+
+
+
+== 升级手动安装
+
+您可以从集群范围的三端技术人员安装升级到另一个集群范围的三端技术人员安装。所有Astra Trident 21.01及更高版本均使用集群范围的运算符。
+
+
+NOTE: 要从使用命名空间范围的运算符(版本20.07到20.10)安装的Asta三端技术升级、请按照的升级说明进行操作 link:../earlier-versions.html["您安装的版本"] 的Astra三端。
+
+.关于此任务
+｛\f270通过｝｛\f270｛\f151、｝｛\f270｝｛\f270｝｛\f151、｝｛\f270｝｛\f270｝｛\f151、｝｛\f270通过｝｛\f151、｝｛\f270｝｛\f270｝｛\f151、｝｛\f270｝
+
+* 对于运行Kubornetes 1.24或更早版本的集群、请使用 link:https://github.com/NetApp/trident/tree/stable/v24.02/deploy/bundle_pre_1_25.yaml["bundle_pre_1_25.yaml"^]。
+* 对于运行Kubernetes 1.25或更高版本的集群、请使用 link:https://github.com/NetApp/trident/tree/stable/v24.02/deploy/bundle_post_1_25.yaml["捆绑包_后_ 1_25.yaml"^]。
+
+
+.开始之前
+确保您使用的是正在运行的Kubbernetes集群 link:../trident-get-started/requirements.html["支持的Kubernetes版本"]。
+
+.步骤
+. 验证Astra Trident版本：
++
+[listing]
+----
+./tridentctl -n trident version
+----
+. 删除用于安装当前 Astra Trident 实例的 Trident 运算符。例如、如果要从23.07升级、请运行以下命令：
++
+[listing]
+----
+kubectl delete -f 23.07.0/trident-installer/deploy/<bundle.yaml> -n trident
+----
+. 如果您使用自定义了初始安装 `TridentOrchestrator` 属性、您可以编辑 `TridentOrchestrator` 用于修改安装参数的对象。其中可能包括为脱机模式指定镜像Trident和CSI映像注册表、启用调试日志或指定映像提取密钥所做的更改。
+. 使用适用于您的环境的正确捆绑包YAML_文件安装<bundle.yaml>三元组、其中_AML_为
+`bundle_pre_1_25.yaml` 或 `bundle_post_1_25.yaml` 根据您的Kubbernetes版本。例如、如果要安装Asta Trident 24.02、请运行以下命令：
++
+[listing]
+----
+kubectl create -f 24.02.0/trident-installer/deploy/<bundle.yaml> -n trident
+----
+
+
+
+
+== 升级Helm安装
+
+您可以升级Asta三端Helm安装。
+
+
+WARNING: 将安装了Astra Trident的Kubernetes集群从1.24升级到1.25或更高版本时、必须将values.yaml更新为set `excludePodSecurityPolicy` to `true` 或添加 `--set excludePodSecurityPolicy=true` 到 `helm upgrade` 命令。
+
+.步骤
+. 如果您 link:../trident-get-started/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-astra-trident-using-helm["已使用Helm安装Asta Trdent"]，您可以使用 `helm upgrade trident netapp-trident/trident-operator --version 100.2402.0` 一步升级。如果您未添加Helm repo或无法使用它进行升级：
++
+.. 从下载最新的Astra Trdent版本 link:https://github.com/NetApp/trident/releases/latest["GitHub上的_assets_部分"^]。
+.. 使用 `helm upgrade` 命令位置 `trident-operator-24.02.0.tgz` 反映了要升级到的版本。
++
+[listing]
+----
+helm upgrade <name> trident-operator-24.02.0.tgz
+----
++
+
+NOTE: 如果您在初始安装期间设置了自定义选项(例如、为三端映像和CSI映像指定专用、镜像注册表)、请附加 `helm upgrade` 命令 `--set` 为了确保这些选项包含在upgrade命令中、否则这些值将重置为默认值。
+
+
+
+. 运行 `helm list` 验证图表和应用程序版本均已升级。运行 `tridentctl logs` 查看任何调试消息。
+
+
+
+
+== 从升级 `tridentctl` 安装到TRIdent操作员
+
+您可以从升级到最新版本的Trident操作员 `tridentctl` 安装。现有后端和PVC将自动可用。
+
+
+NOTE: 在切换安装方法之前、请查看 link:../trident-get-started/kubernetes-deploy.html#moving-between-installation-methods["在安装方法之间移动"]。
+
+.步骤
+. 下载最新的 Astra Trident 版本。
++
+[listing]
+----
+# Download the release required [24.020.0]
+mkdir 24.02.0
+cd 24.02.0
+wget https://github.com/NetApp/trident/releases/download/v24.02.0/trident-installer-24.02.0.tar.gz
+tar -xf trident-installer-24.02.0.tar.gz
+cd trident-installer
+----
+. 创建 `tridentorchestrator` 清单中的CRD。
++
+[listing]
+----
+kubectl create -f deploy/crds/trident.netapp.io_tridentorchestrators_crd_post1.16.yaml
+----
+. 将集群范围的运算符部署在同一命名空间中。
++
+[listing]
+----
+kubectl create -f deploy/<bundle-name.yaml>
+
+serviceaccount/trident-operator created
+clusterrole.rbac.authorization.k8s.io/trident-operator created
+clusterrolebinding.rbac.authorization.k8s.io/trident-operator created
+deployment.apps/trident-operator created
+podsecuritypolicy.policy/tridentoperatorpods created
+
+#Examine the pods in the Trident namespace
+NAME                                  READY   STATUS    RESTARTS   AGE
+trident-controller-79df798bdc-m79dc   6/6     Running   0          150d
+trident-node-linux-xrst8              2/2     Running   0          150d
+trident-operator-5574dbbc68-nthjv     1/1     Running   0          1m30s
+----
+. 创建 `TridentOrchestrator` 安装Astra Trident的CR。
++
+[listing]
+----
+cat deploy/crds/tridentorchestrator_cr.yaml
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+spec:
+  debug: true
+  namespace: trident
+
+kubectl create -f deploy/crds/tridentorchestrator_cr.yaml
+
+#Examine the pods in the Trident namespace
+NAME                                READY   STATUS    RESTARTS   AGE
+trident-csi-79df798bdc-m79dc        6/6     Running   0          1m
+trident-csi-xrst8                   2/2     Running   0          1m
+trident-operator-5574dbbc68-nthjv   1/1     Running   0          5m41s
+----
+. 确认已将三项功能升级到预期版本。
++
+[listing]
+----
+kubectl describe torc trident | grep Message -A 3
+
+Message:                Trident installed
+Namespace:              trident
+Status:                 Installed
+Version:                v24.02.0
+----
+
