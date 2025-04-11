@@ -4510,4 +4510,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="e932e8b67111a2dc118d7599f04cdc8b" category="paragraph">Asta Control配置程序从快照还原数据。您可以验证快照还原状态。</block>
   <block id="454c5148c2a664f37fc49833dc491272" category="list-text">在大多数情况下、如果发生故障、Asta Control配置程序不会自动重试此操作。您需要再次执行此操作。</block>
   <block id="c83b74c2020dd836f5b401ecda0da78c" category="list-text">没有管理员访问权限的Kubbernetes用户可能必须获得管理员授予的权限、才能在其应用程序命名空间中创建TSR CR。</block>
+  <block id="fd2382cbf04a0cd551917ebb29238078" category="paragraph">在节点名称较长的K8s环境中使用NVMe/TCP时、Pod无法连接到存储。</block>
+  <block id="aa68fd6175a82d0d7c1dda4f60cac719" category="paragraph">缩短节点名称、使子系统名称少于64个字符。</block>
 </blocks>

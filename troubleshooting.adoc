@@ -232,3 +232,12 @@ tridentctl obliviate crd
  If you remove the `hostNQN` of the worker node from the corresponding subsystem, the unstaging process gets stuck when you attempt to delete the pod. In this scenario, you cannot run any NVMe CLI commands on the Kubernetes node.
 .临时解决策
 添加 `hostNQN` 返回到子系统。
+
+
+
+=== 已删除命名空间映射
+
+在节点名称较长的K8s环境中使用NVMe/TCP时、Pod无法连接到存储。
+
+.临时解决策
+缩短节点名称、使子系统名称少于64个字符。
