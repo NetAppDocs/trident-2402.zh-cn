@@ -1217,9 +1217,6 @@ Asta三端测试；操作员将自动尝试从该状态中恢复。如果此状�
   <block id="f72ba1a3a498489a96fd8774bfa9ea9d" category="example-title">&lt;strong&gt; Kubernetes升级&lt;/strong&gt;</block>
   <block id="f456a413d0506028374e871768a5f176" category="paragraph">当集群的 Kubernetes 版本升级到受支持的版本时，操作员会自动更新现有的 Astra Trident 安装并进行更改，以确保其满足 Kubernetes 版本的要求。</block>
   <block id="d1aae6ea63eb5e7fe6a9fcea5f671406" category="admonition">如果集群升级到不受支持的版本，则操作员会阻止安装 Astra Trident 。如果已随操作员安装了 Astra Trident ，则会显示一条警告，指示 Astra Trident 安装在不受支持的 Kubernetes 版本上。</block>
-  <block id="c3b2fe84f143129d7a18ad12df229bc6" category="example-title">&lt;strong&gt; 将使用BlueXP (以前称为Cloud Manager)&lt;/strong&gt; 进行集群管理</block>
-  <block id="fd1117c82327fbe8671f26e897ceb8f4" category="inline-link-macro">使用BlueXP的Astra Trident</block>
-  <block id="a76a1e164520105317267dc41b95e8ce" category="paragraph">使用 <block ref="f8c16e8c21124ccc028d2db7fd32a98f" category="inline-link-macro-rx"></block>、您可以升级到最新版本的Astra Trident、添加和管理存储类并将其连接到工作环境、以及使用Cloud Backup Service 备份永久性卷。BlueXP支持使用Trident操作员手动或使用Helm部署Astra Trident。</block>
   <block id="43e6c0a141c1737a96917c56c7e22a73" category="inline-link-macro">安装&lt;block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category='inline-code'/&gt;</block>
   <block id="1a2de31d648d8c09e5c2a9257a5ad67b" category="paragraph">如果您的现有部署必须升级、或者您希望对部署进行高度自定义、则应考虑 <block ref="e214bf159dbaf6573cfe15f1373b92db" category="inline-link-macro-rx"></block>。这是部署 Astra Trident 的传统方法。</block>
   <block id="4c24a3b9facf2ea9fc7ed2ca52dab45d" category="inline-link-macro">自定义&lt;block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category='inline-code'/&gt; 软件安装</block>
@@ -4512,4 +4509,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="c83b74c2020dd836f5b401ecda0da78c" category="list-text">没有管理员访问权限的Kubbernetes用户可能必须获得管理员授予的权限、才能在其应用程序命名空间中创建TSR CR。</block>
   <block id="fd2382cbf04a0cd551917ebb29238078" category="paragraph">在节点名称较长的K8s环境中使用NVMe/TCP时、Pod无法连接到存储。</block>
   <block id="aa68fd6175a82d0d7c1dda4f60cac719" category="paragraph">缩短节点名称、使子系统名称少于64个字符。</block>
+  <block id="15eaa3bd461b989a50d54376e8b82942" category="example-title">&lt;strong&gt;使用NetApp Console管理 Kubernetes 集群&lt;/strong&gt;</block>
+  <block id="28cfb8f261719a05032a41acccc32995" category="paragraph">借助使用NetApp Console 的Astra Trident ，您可以升级到最新版本的Astra Trident，添加和管理存储类并将其连接到工作环境，以及使用Cloud Backup Service备份持久卷。控制台支持使用Trident操作员手动或使用 Helm 部署Astra Trident 。</block>
 </blocks>

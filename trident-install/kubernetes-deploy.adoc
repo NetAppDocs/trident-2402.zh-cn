@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-get-started/kubernetes-deploy.html 
-keywords: deploy, astra trident, methods, operator, tridentctl, helm, tanzu, vmware 
+keywords: deploy, astra trident, methods, operator, tridentctl, helm, tanzu, vmware, netapp console 
 summary: '您可以使用Trident操作符(手动或使用Helm)或安装Astra Trident `tridentctl`。本主题提供了有关为您选择正确安装过程的重要信息。' 
 ---
 = 了解有关Astra Trident安装的信息
@@ -115,10 +115,10 @@ kubectl patch torc <trident-orchestrator-name> -n trident --type=merge -p '{"spe
 NOTE: 如果集群升级到不受支持的版本，则操作员会阻止安装 Astra Trident 。如果已随操作员安装了 Astra Trident ，则会显示一条警告，指示 Astra Trident 安装在不受支持的 Kubernetes 版本上。
 
 ====
-.<strong> 将使用BlueXP (以前称为Cloud Manager)</strong> 进行集群管理
+.<strong>使用NetApp Console管理 Kubernetes 集群</strong>
 [%collapsible]
 ====
-使用 link:https://docs.netapp.com/us-en/cloud-manager-kubernetes/concept-kubernetes.html["使用BlueXP的Astra Trident"^]、您可以升级到最新版本的Astra Trident、添加和管理存储类并将其连接到工作环境、以及使用Cloud Backup Service 备份永久性卷。BlueXP支持使用Trident操作员手动或使用Helm部署Astra Trident。
+借助使用NetApp Console 的Astra Trident ，您可以升级到最新版本的Astra Trident，添加和管理存储类并将其连接到工作环境，以及使用Cloud Backup Service备份持久卷。控制台支持使用Trident操作员手动或使用 Helm 部署Astra Trident 。
 
 ====
 
