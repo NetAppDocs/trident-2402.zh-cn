@@ -16,6 +16,7 @@ summary: 了解适用于ONTAP 的Amazon FSX的后端配置选项。本节提供�
 
 
 
+[[backend-configuration-options]]
 == 后端配置选项
 
 有关后端配置选项，请参见下表：
@@ -155,6 +156,7 @@ Kubernetes持久卷的挂载选项通常在存储类中指定、但如果在存�
 |===
 
 
+[[update-datalif-after-initial-configuration]]
 === 更新 `dataLIF` 初始配置后
 
 您可以在初始配置后更改数据LIF、方法是运行以下命令、为新的后端JSON文件提供更新的数据LIF。
@@ -168,6 +170,7 @@ NOTE: 如果PVC连接到一个或多个Pod、则必须关闭所有对应Pod、�
 
 
 
+[[backend-configuration-options-for-provisioning-volumes]]
 == 用于配置卷的后端配置选项
 
 您可以在中使用这些选项控制默认配置 `defaults` 配置部分。有关示例，请参见以下配置示例。
@@ -211,9 +214,7 @@ NOTE: 如果PVC连接到一个或多个Pod、则必须关闭所有对应Pod、�
 有关详细信息、请参见： link:../trident-reco/security-reco.html["Astra Trident如何与NVE和NAE配合使用"]。 | `false` 
 
 
-| `luksEncryption` | 启用LUKS加密。请参见 link:../trident-reco/security-reco.html#Use-Linux-Unified-Key-Setup-(LUKS)["使用Linux统一密钥设置(LUKS)"]。
-
-仅SAN。 | "" 
+| `luksEncryption` | 启用 LUKS 加密。请参阅 link:../trident-reco/security-luks.html["使用Linux统一密钥设置(LUKS)"]。仅限 SAN。 | "" 
 
 
 | `tieringPolicy` | 要使用的层策略	`none` | `snapshot-only` 适用于ONTAP 9.5 SVM-DR之前的配置 
@@ -234,6 +235,7 @@ SMB默认值为 `ntfs`。
 |===
 
 
+[[example-configurations]]
 == 示例配置
 
 .配置SMB卷的存储类

@@ -16,6 +16,7 @@ summary: 了解如何使用提供的示例配置将适用于Google Cloud的Cloud
 
 
 
+[[google-cloud-driver-details]]
 == Google Cloud驱动程序详细信息
 
 Asta三项功能提供 `gcp-cvs` 与集群通信的驱动程序。支持的访问模式包括：_ReadWriteOnce_(RWO)、_ReadOnlyMany_(ROX)、_ReadWriteMany_(rwx)、_ReadWriteOncePod_(RWOP)。
@@ -37,18 +38,19 @@ Rwo、ROX、rwx、RWOP
 |===
 
 
+[[learn-about-astra-trident-support-for-cloud-volumes-service-for-google-cloud]]
 == 了解适用于Google Cloud的Cloud Volumes Service 的Astra Trident支持
 
-Astra Trident可以在两个卷中创建Cloud Volumes Service 卷之一 link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-types["服务类型"^]：
+Astra Trident 可以通过以下两种方式之一创建 Cloud Volumes Service 卷 link:https://docs.cloud.google.com/netapp/volumes/docs/discover/overview["服务类型"^]：
 
-* *CVS-Performance*：默认的Astra Trident服务类型。这种性能优化的服务类型最适合重视性能的生产工作负载。CVS-Performance服务类型是一种硬件选项、支持的卷大小至少为100 GiB。您可以选择一个 link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-levels#service_levels_for_the_cvs-performance_service_type["三个服务级别"^]：
+* *CVS-Performance*：默认的 Astra Trident 服务类型。这种性能优化的服务类型最适合重视性能的生产工作负载。CVS-Performance 服务类型是支持最小 100 GiB 大小的卷的硬件选项。您可以选择以下选项之一 link:https://docs.cloud.google.com/netapp/volumes/docs/discover/overview["三个服务级别"^]：
 +
 ** `standard`
 ** `premium`
 ** `extreme`
 
 
-* * CVS*：CVS服务类型提供高区域可用性、性能级别限制为中等。CVS服务类型是一个软件选项、可使用存储池支持小至1 GiB的卷。存储池最多可包含50个卷、其中所有卷都共享池的容量和性能。您可以选择一个 link:https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-levels#service_levels_for_the_cvs_service_type["两个服务级别"^]：
+* *CVS*：CVS 服务类型提供高分区可用性，性能水平有限至中等。CVS 服务类型是一种软件选项，它使用存储池来支持小至 1 GiB 的卷。存储池最多可包含 50 个卷，其中所有卷共享池的容量和性能。您可以选择以下选项之一 link:https://docs.cloud.google.com/netapp/volumes/docs/discover/overview["两个服务级别"^]：
 +
 ** `standardsw`
 ** `zoneredundantstandardsw`
@@ -57,7 +59,7 @@ Astra Trident可以在两个卷中创建Cloud Volumes Service 卷之一 link:htt
 
 
 .您需要的内容
-以配置和使用 https://cloud.netapp.com/cloud-volumes-service-for-gcp?utm_source=NetAppTrident_ReadTheDocs&utm_campaign=Trident["适用于 Google Cloud 的 Cloud Volumes Service"^] 后端，您需要满足以下要求：
+要配置和使用  https://www.netapp.com/google-cloud/netapp-volumes/["适用于 Google Cloud 的 Cloud Volumes Service"^] 后端，您需要以下内容：
 
 * 配置了NetApp Cloud Volumes Service 的Google Cloud帐户
 * Google Cloud 帐户的项目编号
@@ -67,6 +69,7 @@ Astra Trident可以在两个卷中创建Cloud Volumes Service 卷之一 link:htt
 
 
 
+[[backend-configuration-options]]
 == 后端配置选项
 
 每个后端都会在一个 Google Cloud 区域中配置卷。要在其他区域创建卷，您可以定义其他后端。
@@ -149,6 +152,7 @@ CVS默认值为"standardsw"。
 |===
 
 
+[[volume-provisioning-options]]
 == 卷配置选项
 
 您可以在中控制默认卷配置 `defaults` 部分。
@@ -177,6 +181,7 @@ CVS服务类型未设置默认值、但至少需要1 GiB。
 |===
 
 
+[[cvs-performance-service-type-examples]]
 == CVS-Performance服务类型示例
 
 以下示例提供了CVS-Performance服务类型的示例配置。
@@ -390,6 +395,7 @@ storage:
 ====
 
 
+[[storage-class-definitions]]
 === 存储类定义
 
 以下StorageClass定义适用于虚拟池配置示例。使用 `parameters.selector`、您可以为每个StorageClass指定用于托管卷的虚拟池。卷将在选定池中定义各个方面。
@@ -460,6 +466,7 @@ allowVolumeExpansion: true
 
 
 
+[[cvs-service-type-examples]]
 == CVS服务类型示例
 
 以下示例提供了CVS服务类型的示例配置。
@@ -582,6 +589,7 @@ serviceLevel: Standardsw
 ====
 
 
+[[whats-next]]
 == 下一步是什么？
 
 创建后端配置文件后，运行以下命令：

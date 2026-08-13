@@ -16,6 +16,7 @@ summary: 了解如何使用 ONTAP SAN 驱动程序配置 ONTAP 后端。
 
 
 
+[[ontap-san-driver-details]]
 == ONTAP SAN驱动程序详细信息
 
 Asta三端存储提供了以下SAN存储驱动程序、用于与ONTAP集群进行通信。支持的访问模式包括：_ReadWriteOnce_(RWO)、_ReadOnlyMany_(ROX)、_ReadWriteMany_(rwx)、_ReadWriteOncePod_(RWOP)。
@@ -105,6 +106,7 @@ Rox和rwx在文件系统卷模式下不可用。
 |===
 
 
+[[astra-control-driver-compatibility]]
 === Astra Control驱动程序兼容性
 
 Astra Control可为使用创建的卷提供无缝保护、灾难恢复和移动性(在Kubernetes集群之间移动卷) `ontap-nas`， `ontap-nas-flexgroup`，和 `ontap-san` 驱动程序。请参见 link:https://docs.netapp.com/us-en/astra-control-center/use/replicate_snapmirror.html#replication-prerequisites["Astra Control复制前提条件"^] 了解详细信息。
@@ -119,6 +121,7 @@ Astra Control可为使用创建的卷提供无缝保护、灾难恢复和移动�
 ====
 
 
+[[user-permissions]]
 == 用户权限
 
 Astra Trident应以ONTAP 或SVM管理员身份运行、通常使用 `admin` 集群用户或 `vsadmin` SVM用户或具有相同角色的其他名称的用户。对于适用于NetApp ONTAP 的Amazon FSX部署、Astra Trident应使用集群以ONTAP 或SVM管理员身份运行 `fsxadmin` 用户或 `vsadmin` SVM用户或具有相同角色的其他名称的用户。。 `fsxadmin` 用户是集群管理员用户的有限替代用户。
@@ -130,6 +133,7 @@ NOTE: 如果您使用 `limitAggregateUsage` 参数、需要集群管理员权限
 
 
 
+[[additional-considerations-for-nvmetcp]]
 == NVMe/TCP的其他注意事项
 
 Asta三端存储器支持使用的非易失性内存快速(NVMe)协议 `ontap-san` 驱动程序包括：

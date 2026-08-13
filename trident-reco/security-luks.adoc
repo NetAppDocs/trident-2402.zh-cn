@@ -31,6 +31,7 @@ grep "aes" /proc/cpuinfo
 
 
 
+[[enable-luks-encryption]]
 == 启用LUKS加密
 
 您可以对ONTAP SAN和ONTAP SAN经济卷使用Linux统一密钥设置(Unified Key Setup、LUKS)启用每个卷的主机端加密。
@@ -88,12 +89,14 @@ stringData:
 
 
 
+[[limitations]]
 === 限制
 
 LUKS加密的卷无法利用ONTAP 重复数据删除和数据压缩功能。
 
 
 
+[[backend-configuration-for-importing-luks-volumes]]
 == 用于导入LUKS卷的后端配置
 
 要导入LUKS卷、必须设置 `luksEncryption` to(`true` 在后端。。 `luksEncryption` Option可告知A作用 中的三端磁盘是否符合LUKS (`true`)或不符合LUKS (`false`)、如以下示例所示。
@@ -115,6 +118,7 @@ defaults:
 ----
 
 
+[[rotate-a-luks-passphrase]]
 == 轮换LUKS密码短语
 
 您可以轮换LUKS密码短语并确认轮换。
@@ -209,6 +213,7 @@ NOTE: 如果返回两个密码短语、例如 `luksPassphraseNames: ["B", "A"]`�
 
 
 
+[[enable-volume-expansion]]
 == 启用卷扩展
 
 您可以在LUKS加密的卷上启用卷扩展。

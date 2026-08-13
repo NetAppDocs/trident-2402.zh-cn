@@ -16,6 +16,7 @@ summary: '要创建卷、请使用标准 `docker volume` 根据需要指定了As
 
 
 
+[[create-a-volume]]
 == 创建卷
 
 * 使用默认名称创建包含驱动程序的卷：
@@ -48,6 +49,7 @@ TIP: 卷大小以字符串表示，该字符串包含一个包含可选单元的
 
 
 
+[[remove-a-volume]]
 == 删除卷
 
 * 像删除任何其他 Docker 卷一样删除此卷：
@@ -66,6 +68,7 @@ IMPORTANT: 使用时 `solidfire-san` 驱动程序中、上述示例将删除并�
 
 
 
+[[clone-a-volume]]
 == 克隆卷
 
 使用时 `ontap-nas`， `ontap-san`， `solidfire-san`，和 `gcp-cvs storage drivers`、Astra Trident可以克隆卷。使用时 `ontap-nas-flexgroup` 或 `ontap-nas-economy` 驱动程序、不支持克隆。从现有卷创建新卷将创建新快照。
@@ -92,6 +95,7 @@ docker volume create -d <driver_name> --name <new_name> -o from=<source_docker_v
 
 
 
+[[example]]
 === 示例
 
 [listing]
@@ -128,6 +132,7 @@ docker volume rm volFromSnap
 ----
 
 
+[[access-externally-created-volumes]]
 == 访问外部创建的卷
 
 如果容器没有分区、并且Astra Trident支持其文件系统(例如：an)、则可以使用Trident * only *通过容器访问外部创建的块设备(或其克隆) `ext4`格式化 `/dev/sdc1` 无法通过Astra Trident访问)。

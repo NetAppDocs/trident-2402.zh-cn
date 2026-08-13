@@ -16,6 +16,7 @@ summary: '创建一个使用已配置的Kubernetes StorageClass来请求对PV的
 
 
 
+[[overview]]
 == 概述
 
 答 link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/["_PersigentVolume_"^] (PV)是由集群管理员在Kubbernetes集群上配置的物理存储资源。。 https://kubernetes.io/docs/concepts/storage/persistent-volumes["_PersigentVolumeClaim_"^] (PVC)是对集群上的永久卷的访问请求。
@@ -26,6 +27,7 @@ summary: '创建一个使用已配置的Kubernetes StorageClass来请求对PV的
 
 
 
+[[sample-manifests]]
 === 示例清单
 
 .PerfsentVolume示例清单
@@ -148,6 +150,7 @@ spec:
 ====
 
 
+[[create-the-pv-and-pvc]]
 == 创建PV和PVC
 
 .步骤

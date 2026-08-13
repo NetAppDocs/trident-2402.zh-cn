@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: trident-get-started/kubernetes-customize-deploy.html 
+permalink: trident-install/kubernetes-customize-deploy.html 
 keywords: deploy, trident, methods, operator, tridentctl, helm, attributes, customize, tridentorchestrator, smb, windows 
 summary: '使用Trident操作员可以使用中的属性自定义Astra Trident的安装方式 `TridentOrchestrator` 规格' 
 ---
@@ -16,6 +16,7 @@ summary: '使用Trident操作员可以使用中的属性自定义Astra Trident�
 
 
 
+[[understanding-controller-pods-and-node-pods]]
 == 了解控制器Pod和节点Pod
 
 Astra Trident作为一个控制器POD运行、并在集群中的每个工作节点上运行一个节点POD。节点POD必须在任何可能要挂载Astra Trident卷的主机上运行。
@@ -28,6 +29,7 @@ Kubernetes link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-p
 
 
 
+[[configuration-options]]
 == 配置选项
 
 
@@ -126,6 +128,7 @@ NOTE: 有关格式化POD参数的详细信息、请参阅 link:https://kubernete
 
 
 
+[[details-about-force-detach]]
 === 有关强制断开的详细信息
 
 可对使用强制断开 `ontap-san` 和 `ontap-san-economy` 仅限。在启用强制断开之前、必须在Kubbernetes集群上启用非正常节点关闭(NGN)。有关详细信息，请参见 link:https://kubernetes.io/docs/concepts/architecture/nodes/#non-graceful-node-shutdown["Kubnetes：节点非正常关闭"^]。
@@ -151,6 +154,7 @@ NOTE: 在节点重新通过资格认定(标记为后)之前、三端技术(Tride
 
 
 
+[[sample-configurations]]
 == 配置示例
 
 您可以使用中的属性 <<配置选项>> 定义时 `TridentOrchestrator` 自定义安装。

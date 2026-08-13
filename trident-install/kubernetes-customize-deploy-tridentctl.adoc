@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: trident-get-started/kubernetes-customize-deploy-tridentctl.html 
+permalink: trident-install/kubernetes-customize-deploy-tridentctl.html 
 keywords: deploy, astra trident, methods, operator, tridentctl, helm, attributes, customize 
 summary: 您可以使用Astra Trident安装程序自定义部署。 
 ---
@@ -16,6 +16,7 @@ summary: 您可以使用Astra Trident安装程序自定义部署。
 
 
 
+[[learn-about-the-installer]]
 == 了解安装程序
 
 使用Astra Trident安装程序可以自定义属性。例如、如果已将Trident映像复制到专用存储库、则可以使用指定映像名称 `--trident-image`。如果已将Trident映像以及所需的CSI sidecar映像复制到专用存储库、则最好使用指定该存储库的位置 `--image-registry` 交换机、其形式为 `<registry FQDN>[:port]`。

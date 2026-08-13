@@ -16,6 +16,7 @@ summary: 了解如何在安装Astra Trident时创建和使用ONTAP NAS驱动程�
 
 
 
+[[backend-configuration-options]]
 == 后端配置选项
 
 有关后端配置选项，请参见下表：
@@ -138,6 +139,7 @@ Kubernetes持久卷的挂载选项通常在存储类中指定、但如果在存�
 |===
 
 
+[[backend-configuration-options-for-provisioning-volumes]]
 == 用于配置卷的后端配置选项
 
 您可以在中使用这些选项控制默认配置 `defaults` 配置部分。有关示例，请参见以下配置示例。
@@ -202,6 +204,7 @@ NOTE: 在 Astra Trident 中使用 QoS 策略组需要 ONTAP 9.8 或更高版本�
 
 
 
+[[volume-provisioning-examples]]
 === 卷配置示例
 
 下面是一个定义了默认值的示例：
@@ -250,6 +253,7 @@ image::../media/volume-show-nas.png[显示了 volume show 命令的输出。]
 
 
 
+[[minimal-configuration-examples]]
 == 最低配置示例
 
 以下示例显示了将大多数参数保留为默认值的基本配置。这是定义后端的最简单方法。
@@ -412,6 +416,7 @@ storagePrefix: myPrefix_
 ====
 
 
+[[examples-of-backends-with-virtual-pools]]
 == 虚拟池后端示例
 
 在下面显示的示例后端定义文件中、为所有存储池设置了特定默认值、例如 `spaceReserve` 无、 `spaceAllocation` 为false、和 `encryption` 为false。虚拟池在存储部分中进行定义。
@@ -594,6 +599,7 @@ storage:
 ====
 
 
+[[map-backends-to-storageclasses]]
 == 将后端映射到 StorageClasses
 
 以下StorageClass定义请参见 <<虚拟池后端示例>>。使用 `parameters.selector` 字段中、每个StorageClass都会指出可用于托管卷的虚拟池。卷将在选定虚拟池中定义各个方面。
@@ -669,6 +675,7 @@ Astra Trident将决定选择哪个虚拟池、并确保满足存储要求。
 
 
 
+[[update-datalif-after-initial-configuration]]
 == 更新 `dataLIF` 初始配置后
 
 您可以在初始配置后更改数据LIF、方法是运行以下命令、为新的后端JSON文件提供更新的数据LIF。

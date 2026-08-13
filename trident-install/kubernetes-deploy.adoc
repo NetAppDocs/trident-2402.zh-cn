@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: trident-get-started/kubernetes-deploy.html 
+permalink: trident-install/kubernetes-deploy.html 
 keywords: deploy, astra trident, methods, operator, tridentctl, helm, tanzu, vmware, netapp console 
 summary: '您可以使用Trident操作符(手动或使用Helm)或安装Astra Trident `tridentctl`。本主题提供了有关为您选择正确安装过程的重要信息。' 
 ---
@@ -16,6 +16,7 @@ summary: '您可以使用Trident操作符(手动或使用Helm)或安装Astra Tri
 
 
 
+[[critical-information-about-astra-trident-24-02]]
 == 有关Astra Trdent的重要信息24.02
 
 *您必须阅读以下有关Astra Trident的重要信息。*
@@ -33,11 +34,12 @@ summary: '您可以使用Trident操作符(手动或使用Helm)或安装Astra Tri
 ====
 
 
+[[before-you-begin]]
 == 开始之前
 
 无论您的安装路径如何、您都必须：
 
-* 对运行受支持的Kubernetes版本并启用了功能要求的受支持Kubernetes集群的完全权限。查看 link:requirements.html["要求"] 了解详细信息。
+* 运行受支持的 Kubernetes 版本的受支持的 Kubernetes 集群的完整权限，并启用了功能要求。查看 link:../trident-get-started/requirements.html["要求"] 了解详情。
 * 访问受支持的NetApp存储系统。
 * 能够从所有Kubernetes工作节点挂载卷。
 * 具有的Linux主机 `kubectl` (或 `oc`(如果您使用的是OpenShift)已安装并配置为管理要使用的Kubernetes集群。
@@ -46,19 +48,21 @@ summary: '您可以使用Trident操作符(手动或使用Helm)或安装Astra Tri
 
 
 
-TIP: 如果您尚未熟悉 link:../trident-concepts/intro.html["基本概念"^]，现在是一个实现这一目标的好时机。
+TIP: 如果您还没有熟悉 link:../trident-get-started/intro.html["基本概念"^]，现在是时候了。
 
 
 
+[[choose-your-installation-method]]
 == 选择安装方法
 
-选择适合您的安装方法。您还应查看的注意事项 link:kubernetes-deploy.html#move-between-installation-methods["在方法之间移动"] 在做出决定之前。
+选择适合您的安装方法。您还应该在做出决定之前查看 link:kubernetes-deploy.html#moving-between-installation-methods["在方法之间移动"] 的注意事项。
 
 
 
+[[using-the-trident-operator]]
 === 使用Trident运算符
 
-无论是手动部署还是使用Helm部署、Trident操作员都是简化安装和动态管理Astra Trident资源的绝佳方式。您可以做到这一点 link:../trident-get-started/kubernetes-customize-deploy.html["自定义Trident操作员部署"] 使用中的属性 `TridentOrchestrator` 自定义资源(CR)。
+无论是手动部署还是使用 Helm，Trident 操作员都是简化安装和动态管理 Astra Trident 资源的好方法。您甚至可以link:kubernetes-customize-deploy.html["自定义Trident操作员部署"]使用 `TridentOrchestrator`自定义资源 (CR) 中的属性。
 
 使用Trident运算符的优势包括：
 
@@ -123,6 +127,7 @@ NOTE: 如果集群升级到不受支持的版本，则操作员会阻止安装 A
 ====
 
 
+[[using-tridentctl]]
 === 使用 `tridentctl`
 
 如果您的现有部署必须升级、或者您希望对部署进行高度自定义、则应考虑 。这是部署 Astra Trident 的传统方法。
@@ -135,6 +140,7 @@ NOTE: 从 22.04 版开始，每次安装 Astra Trident 时， AES 密钥将不�
 
 
 
+[[choose-your-installation-mode]]
 == 选择安装模式
 
 根据您的组织所需的_installation mode"(标准)、"Offline"(脱机)或"Remote"(远程)来确定部署过程。
@@ -174,6 +180,7 @@ NOTE: 无论注册表配置如何、CSI映像都必须驻留在一个注册表�
 ====
 
 
+[[select-the-process-based-on-your-method-and-mode]]
 == 根据您的方法和模式选择过程
 
 做出决定后、请选择相应的流程。
@@ -203,6 +210,7 @@ link:kubernetes-deploy-tridentctl.html["标准或脱机安装"]
 |===
 
 
+[[moving-between-installation-methods]]
 == 在安装方法之间移动
 
 您可以决定更改安装方法。在执行此操作之前、请考虑以下事项：
@@ -214,6 +222,7 @@ link:kubernetes-deploy-tridentctl.html["标准或脱机安装"]
 
 
 
+[[other-known-configuration-options]]
 == 其他已知配置选项
 
 在 VMware Tanzu Portfolio 产品上安装 Astra Trident 时：

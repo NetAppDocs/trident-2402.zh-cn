@@ -16,6 +16,7 @@ summary: '您可以将适用于NetApp ONTAP 的Amazon FSX文件系统与Astra Tr
 
 
 
+[[requirements]]
 == 要求
 
 此外 link:../trident-get-started/requirements.html["Astra Trident 要求"]要将适用于ONTAP 的FSx与Astra Trident集成、您需要：
@@ -32,13 +33,14 @@ NOTE: 确保按照Amazon Linux和Ubuntu所需的节点准备步骤进行操作 h
 
 
 
+[[ontap-san-and-nas-driver-integration]]
 == ONTAP SAN和NAS驱动程序集成
 
 
 WARNING: 如果要为SMB卷配置、则必须读取 <<准备配置SMB卷>> 创建后端之前。
 
 .步骤
-. 使用其中一种部署Astra Trident link:../trident-get-started/kubernetes-deploy.html["部署方法"]。
+. 使用以下方法之一部署 Astra Trident link:../trident-install/kubernetes-deploy.html["部署方法"]。
 . 收集SVM管理LIF DNS名称。例如、使用AWS命令行界面查找 `DNSName` 下的条目 `Endpoints` -> `Management` 运行以下命令后：
 +
 [listing]
@@ -154,6 +156,7 @@ spec:
 
 
 
+[[prepare-to-provision-smb-volumes]]
 == 准备配置SMB卷
 
 您可以使用配置SMB卷 `ontap-nas` 驱动程序。完成前 <<ONTAP SAN和NAS驱动程序集成>> 完成以下步骤。

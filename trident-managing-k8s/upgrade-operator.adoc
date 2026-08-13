@@ -12,10 +12,11 @@ summary: 您可以使用操作员轻松升级现有的 Astra Trident 安装。
 
 
 [role="lead"]
-您可以使用三端操作员手动或使用Helm升级A作用 于三端的Astra。您可以从一个TRIdent操作员安装升级到另一个TRIdent操作员安装或从升级 `tridentctl` 安装到一个TRIdent操作员版本。请查看 link:upgrade-trident.html#select-an-upgrade-method["选择升级方法"] 升级三端修复程序安装之前。
+您可以使用 Trident 操作员手动或使用 Helm 升级 Astra Trident。您可以从 Trident 操作员安装升级到另一个 Trident 操作员安装，或从 `tridentctl`安装升级到 Trident 操作员版本。在升级 Trident 操作员安装之前，请查看link:upgrade-trident.html#step-3-select-an-upgrade-method["选择升级方法"]。
 
 
 
+[[upgrade-a-manual-installation]]
 == 升级手动安装
 
 您可以从集群范围的三端技术人员安装升级到另一个集群范围的三端技术人员安装。所有Astra Trident 21.01及更高版本均使用集群范围的运算符。
@@ -58,6 +59,7 @@ kubectl create -f 24.02.0/trident-installer/deploy/<bundle.yaml> -n trident
 
 
 
+[[upgrade-a-helm-installation]]
 == 升级Helm安装
 
 您可以升级Asta三端Helm安装。
@@ -66,7 +68,7 @@ kubectl create -f 24.02.0/trident-installer/deploy/<bundle.yaml> -n trident
 WARNING: 将安装了Astra Trident的Kubernetes集群从1.24升级到1.25或更高版本时、必须将values.yaml更新为set `excludePodSecurityPolicy` to `true` 或添加 `--set excludePodSecurityPolicy=true` 到 `helm upgrade` 命令。
 
 .步骤
-. 如果您 link:../trident-get-started/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-astra-trident-using-helm["已使用Helm安装Asta Trdent"]，您可以使用 `helm upgrade trident netapp-trident/trident-operator --version 100.2402.0` 一步升级。如果您未添加Helm repo或无法使用它进行升级：
+. 如果您link:../trident-install/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-trident-using-helm["已使用Helm安装Asta Trdent"]，您可以使用 `helm upgrade trident netapp-trident/trident-operator --version 100.2402.0`一步升级。如果您没有添加 Helm 存储库或无法使用它进行升级：
 +
 .. 从下载最新的Astra Trdent版本 link:https://github.com/NetApp/trident/releases/latest["GitHub上的_assets_部分"^]。
 .. 使用 `helm upgrade` 命令位置 `trident-operator-24.02.0.tgz` 反映了要升级到的版本。
@@ -86,12 +88,13 @@ NOTE: 如果您在初始安装期间设置了自定义选项(例如、为三端�
 
 
 
+[[upgrade-from-a-tridentctl-installation-to-trident-operator]]
 == 从升级 `tridentctl` 安装到TRIdent操作员
 
 您可以从升级到最新版本的Trident操作员 `tridentctl` 安装。现有后端和PVC将自动可用。
 
 
-NOTE: 在切换安装方法之前、请查看 link:../trident-get-started/kubernetes-deploy.html#moving-between-installation-methods["在安装方法之间移动"]。
+NOTE: 在切换安装方法之前，请查看 link:../trident-install/kubernetes-deploy.html#moving-between-installation-methods["在安装方法之间移动"]。
 
 .步骤
 . 下载最新的 Astra Trident 版本。
