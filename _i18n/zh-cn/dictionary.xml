@@ -4004,8 +4004,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="87a522ecb9df14bf978f6f1da8a654a8" category="list-text">您不能通过删除来撤消对源PVC的访问<block ref="287f26e3328f9ac0f3f4da2cdaddd3e2" prefix=" " category="inline-code"></block> 或<block ref="11650d25d20af47978d85fd6e19c89aa" prefix=" " category="inline-code"></block> 标注或删除<block ref="d6995f631b22fb3f8e94aad1b40d1280" prefix=" " category="inline-code"></block> CR.要撤消访问、必须删除从属PVC。</block>
   <block id="3908892c437778f8b161a2ca006782cd" category="list-text">无法在从属卷上执行快照、克隆和镜像。</block>
   <block id="8ff961668c6784e84b25c265cbb629d7" category="paragraph">要了解有关跨命名空间卷访问的详细信息、请执行以下操作：</block>
-  <block id="f1cfea5f1444de607dfa549b3aa57010" category="inline-link-macro">在命名空间之间共享卷：对跨命名空间卷访问说Hello</block>
-  <block id="2780f690b7670efc296ac19ef3029d0c" category="list-text">请访问 <block ref="b0d29f1b2abb2cc552e4cc47177582ef" category="inline-link-macro-rx"></block>。</block>
   <block id="821b0ad941ad2559ef18eb8de56a470e" category="summary">Kubernetes 集群中的所有工作节点都需要能够挂载为 Pod 配置的卷。如果您在其中一个后端使用的是 ontap-nas ， ontap-nas-economy. ontap-nas-flexgroup 驱动程序，则您的工作节点需要 NFS 工具。否则，它们需要使用 iSCSI 工具。</block>
   <block id="cedfb4d575651cbf026e87084c68731c" category="paragraph">Kubernetes集群中的所有工作节点都必须能够挂载为Pod配置的卷。要准备工作节点、必须根据您选择的驱动程序安装NFS、iSCSI或NVMe/TCP工具。</block>
   <block id="262309361fe5b6dcda3a2eae08a48c2d" category="section-title">选择合适的工具</block>
@@ -4477,7 +4475,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="fc2e66218fd84f948c8422e9281248bb" category="paragraph">安装和升级 Astra Trident 的众多<block ref="2b6c752c2a0adaf915d24df45e6dabc3" category="inline-link-macro-rx"></block>之一是自动处理 Astra Trident 和 Kubernetes 对象，而不会中断现有的已挂载卷。通过这种方式，Astra Trident 可以支持零停机时间的升级，或<block ref="c0fb6b6f12bb8ae805a97690328ec023" category="inline-link-macro-rx"></block>。特别是，Trident 操作符与 Kubernetes 集群通信以：</block>
   <block id="39b249736124fb00d653108623277947" category="admonition">有关 Kubernetes 集群上 Astra Trident 架构的更多信息，请参见 <block ref="d9cc95c35405d0ba55bb1c80379b860b" category="inline-link-macro-rx"></block>。</block>
   <block id="db7a344a2f782e818bfa08cc874be2d3" category="paragraph">您可以使用 Trident 操作员手动或使用 Helm 升级 Astra Trident。您可以从 Trident 操作员安装升级到另一个 Trident 操作员安装，或从<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>安装升级到 Trident 操作员版本。在升级 Trident 操作员安装之前，请查看<block ref="ad3ae3ba576f54a9ed86202bbeedc293" category="inline-link-macro-rx"></block>。</block>
-  <block id="fa6a2899788eb314dacfba8d3c7aeff3" category="list-text">如果您<block ref="9730f6b830d650fd0abcf884e4180e07" category="inline-link-macro-rx"></block>，您可以使用<block ref="f8055407f6b06e8c86fe98fdbd160c87" prefix=" " category="inline-code"></block>一步升级。如果您没有添加 Helm 存储库或无法使用它进行升级：</block>
   <block id="8edaa40191fd981b339b65738ae96ecc" category="admonition">在切换安装方法之前，请查看 <block ref="d9897dfd3f891279098b72584e2caa99" category="inline-link-macro-rx"></block>。</block>
   <block id="8fec8c5961acee22b528da59b1a909a9" category="paragraph">一般来说，您应该使用与初始安装相同的方法进行升级，但您可以<block ref="be81b6c3db35f66680ab7fc08ff1a8b2" category="inline-link-macro-rx"></block>。升级 Astra Trident 有两种选择。</block>
   <block id="7ba0dd834b932c7125765a293d38c4f6" category="paragraph">在使用<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>进行升级之前，请先<block ref="ad3ae3ba576f54a9ed86202bbeedc293" category="inline-link-macro-rx"></block>审核。</block>
@@ -4496,4 +4493,7 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="9502f88fbe245a8b7aaf0d7523fd74d1" category="cell">启用 LUKS 加密。请参阅 <block ref="569f9f91cdcc19909b8acbf6f423daf7" category="inline-link-macro-rx"></block>。仅限 SAN。</block>
   <block id="5460ecbb6371c1df42df4a9c16a07c32" category="list-text">使用以下方法之一部署 Astra Trident <block ref="9f5304e884de68405d3f7d425674cf34" category="inline-link-macro-rx"></block>。</block>
   <block id="3505f295d6a44375d99670b663949ca1" category="paragraph">使用该<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>实用程序，您可以运行该<block ref="b5eda0a74558a342cf659187f06f746f" prefix=" " category="inline-code"></block>命令来获取从属卷。有关详细信息，请参阅链接：../trident-managing-k8s/tridentctl.html<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix="[" category="inline-code"></block>命令和选项]。</block>
+  <block id="ff0d92cc80e14b257375f87a0306ab8c" category="list-text">如果您<block ref="0d686e3d2fd8a83c53781f8faf92011d" category="inline-link-macro-rx"></block>，您可以使用<block ref="f8055407f6b06e8c86fe98fdbd160c87" prefix=" " category="inline-code"></block>一步升级。如果您没有添加 Helm 存储库或无法使用它进行升级：</block>
+  <block id="96e1384807331548bf745acde0fe1b73" category="inline-link-macro">NetAppTV</block>
+  <block id="00ce2a838361cbe2731edcce256f7933" category="list-text">观看 <block ref="393cda30e9ed59b399472768b05fff9a" category="inline-link-macro-rx"></block> 上的演示。</block>
 </blocks>

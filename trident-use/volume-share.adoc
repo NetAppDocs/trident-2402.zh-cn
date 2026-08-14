@@ -177,5 +177,5 @@ flags
 
 要了解有关跨命名空间卷访问的详细信息、请执行以下操作：
 
-* 请访问 link:https://cloud.netapp.com/blog/astra-blg-sharing-volumes-between-namespaces-say-hello-to-cross-namespace-volume-access["在命名空间之间共享卷：对跨命名空间卷访问说Hello"^]。
+* 观看 link:https://www.netapp.com/video/solutions-and-products/["NetAppTV"^] 上的演示。
 

@@ -68,7 +68,7 @@ kubectl create -f 24.02.0/trident-installer/deploy/<bundle.yaml> -n trident
 WARNING: 将安装了Astra Trident的Kubernetes集群从1.24升级到1.25或更高版本时、必须将values.yaml更新为set `excludePodSecurityPolicy` to `true` 或添加 `--set excludePodSecurityPolicy=true` 到 `helm upgrade` 命令。
 
 .步骤
-. 如果您link:../trident-install/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-trident-using-helm["已使用Helm安装Asta Trdent"]，您可以使用 `helm upgrade trident netapp-trident/trident-operator --version 100.2402.0`一步升级。如果您没有添加 Helm 存储库或无法使用它进行升级：
+. 如果您link:../trident-install/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-astra-trident-using-helm["已使用Helm安装Asta Trdent"]，您可以使用 `helm upgrade trident netapp-trident/trident-operator --version 100.2402.0`一步升级。如果您没有添加 Helm 存储库或无法使用它进行升级：
 +
 .. 从下载最新的Astra Trdent版本 link:https://github.com/NetApp/trident/releases/latest["GitHub上的_assets_部分"^]。
 .. 使用 `helm upgrade` 命令位置 `trident-operator-24.02.0.tgz` 反映了要升级到的版本。
